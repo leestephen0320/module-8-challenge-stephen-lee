@@ -303,7 +303,7 @@ class Cli {
         // TODO: check if the selected vehicle is the truck
         if(truck === answers.vehicleToTow) {
         // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
-          console.log(`${answers.vehicleToTow} cannot tow itself.`);
+          console.log(`${answers.vehicleToTow.model} ${answers.vehicleToTow.make} cannot tow itself.`);
         }
         // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
         else {
@@ -406,6 +406,7 @@ class Cli {
               }
             }
           }
+          this.performActions();
         }
         // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
         else if (answers.action == 'Wheelie') {
@@ -414,7 +415,6 @@ class Cli {
               if (this.vehicles[i].vin === this.selectedVehicleVin) {
                 const motorWheelie = this.vehicles[i] as Motorbike;
                 motorWheelie.wheelie();
-                return;
               }
             }
           }
