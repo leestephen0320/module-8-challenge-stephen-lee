@@ -402,8 +402,12 @@ class Cli {
         else if (answers.action == 'Tow') {
           let truck_new: Truck | undefined;
           for (let i = 0; i < this.vehicles.length; i++) {
-            if (this.vehicles[i] instanceof Truck && this.vehicles[i].vin === this.selectedVehicleVin){
-              truck_new = this.vehicles[i] as Truck
+            if (this.vehicles[i].vin === this.selectedVehicleVin){
+              if (this.vehicles[i] instanceof Truck){
+                truck_new = this.vehicles[i] as Truck;
+              } else {
+                console.log(`${this.vehicles[i].make} ${this.vehicles[i].model} is not a truck and cannot tow.`)
+              }             
             }
           }
           if (truck_new) {
@@ -414,10 +418,13 @@ class Cli {
         // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
         else if (answers.action == 'Wheelie') {
           for (let i = 0; i < this.vehicles.length; i++) {
-            if (this.vehicles[i] instanceof Motorbike){
-              if (this.vehicles[i].vin === this.selectedVehicleVin) {
+            if (this.vehicles[i].vin === this.selectedVehicleVin){
+              if (this.vehicles[i] instanceof Motorbike) {
                 const motorWheelie = this.vehicles[i] as Motorbike;
                 motorWheelie.wheelie();
+              }
+              else {
+                console.log(`${this.vehicles[i].make} ${this.vehicles[i].model} is not a motorbike and cannot wheelie.`)
               }
             }
           }
